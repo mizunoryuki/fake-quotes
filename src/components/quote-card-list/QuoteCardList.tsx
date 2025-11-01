@@ -17,7 +17,6 @@ export function QuoteCardList({ generatedCards }: Props) {
 			<Swiper
 				navigation={true}
 				modules={[Navigation]}
-				spaceBetween={50}
 				slidesPerView={1}
 				className={styles.swiper}
 				onSlideChange={() => console.log('slide change')}
