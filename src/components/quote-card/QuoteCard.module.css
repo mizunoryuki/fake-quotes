@@ -1,0 +1,34 @@
+.quoteCard {
+	width: 600px;
+	padding: 40px;
+	background: #f9f9f9;
+	border-radius: 20px;
+	text-align: center;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.quoteText {
+	font-size: 24px;
+	margin-bottom: 20px;
+	color: #333;
+}
+
+.subtitle {
+	font-size: 16px;
+	color: #555;
+}
+
+.downloadButton {
+	margin-top: 20px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	background: #007aff;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+.downloadButton:hover {
+	opacity: 0.95;
+}
+

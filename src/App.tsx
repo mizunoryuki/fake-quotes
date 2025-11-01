@@ -1,11 +1,11 @@
 import './App.css'
-import QuoteCard from './components/generate-word/GenerateWordContainer'
+import {QuoteCardContainer} from './components/quote-card/QuoteCardContainer'
 
 function App() {
 
   return (
     <>
-    <QuoteCard />
+      <QuoteCardContainer />
     </>
   )
 }
