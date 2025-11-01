@@ -1,3 +1,10 @@
+.quoteCardContainer {
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .quoteCard {
 	width: 600px;
 	padding: 40px;

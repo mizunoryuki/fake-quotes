@@ -7,7 +7,7 @@ type Props = {
 
 export function QuoteCard({ ref, handleDownload }: Props) {
     return(
-    <div className="flex flex-col items-center">
+    <div className={styles.quoteCardContainer}>
       <div
         ref={ref}
         id="quote-card"

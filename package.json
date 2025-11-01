@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "html-to-image": "^1.11.13",
+    "motion": "^12.23.24",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "swiper": "^12.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
