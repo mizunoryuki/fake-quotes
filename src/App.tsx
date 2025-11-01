@@ -7,7 +7,13 @@ function App() {
 
   return (
     <>
-    <InputFormContainer />
+      <div className="app-header">
+        <div>
+          <h1 className="app-title">名言生成</h1>
+          <p className="app-description">あなたのためのオリジナル名言を生成します。</p>
+        </div>
+        <InputFormContainer />
+      </div>
       <QuoteCardContainer />
       <QuoteCardListContainer generatedCards={['a','i','u','e','o']}/>
     </>

@@ -12,7 +12,7 @@ export function InputForm({ quote, author, setQuote, setAuthor, onGenerate }: Pr
 		<div className={styles.container}>
 			<div className={styles.form}>
 			<label className={styles.label}>
-				<span className={styles.labelTitle}>名言（quote）</span>
+				<span className={styles.labelTitle}>名言</span>
 				<textarea
 					value={quote}
 					onChange={(e) => setQuote(e.target.value)}
@@ -23,7 +23,7 @@ export function InputForm({ quote, author, setQuote, setAuthor, onGenerate }: Pr
 			</label>
 
 			<label className={styles.label}>
-				<span className={styles.labelTitle}>著者（author）</span>
+				<span className={styles.labelTitle}>著者</span>
 				<input
 					value={author}
 					onChange={(e) => setAuthor(e.target.value)}
