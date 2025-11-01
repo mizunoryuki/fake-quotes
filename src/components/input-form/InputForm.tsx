@@ -10,6 +10,7 @@ type Props = {
 export function InputForm({ quote, author, setQuote, setAuthor, onGenerate }: Props) {
 	return (
 		<div className={styles.container}>
+			<div className={styles.form}>
 			<label className={styles.label}>
 				<span className={styles.labelTitle}>名言（quote）</span>
 				<textarea
@@ -36,6 +37,7 @@ export function InputForm({ quote, author, setQuote, setAuthor, onGenerate }: Pr
 					画像を生成する 🎨
 				</button>
 				<div className={styles.helper}>生成した画像はダウンロードして共有できます。</div>
+			</div>
 			</div>
 		</div>
 	);
