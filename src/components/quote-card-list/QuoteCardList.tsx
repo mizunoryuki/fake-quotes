@@ -1,15 +1,15 @@
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { QuoteCardInput } from "../../types/types";
 import { QuoteCardContainer } from "../quote-card/QuoteCardContainer";
 import styles from "./quoteCardList.module.css";
 
 type Props = {
-	generatedCards: QuoteCard[];
+	generatedCards: QuoteCardInput[];
 };
 
 import "swiper/css";
 import "swiper/css/navigation";
-import type { QuoteCard } from "../../types/types";
 
 export function QuoteCardList({ generatedCards }: Props) {
 	return (

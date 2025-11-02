@@ -1,4 +1,4 @@
-export type QuoteCard = {
+export type QuoteCardInput = {
 	quote: string;
 	author: string;
 };
