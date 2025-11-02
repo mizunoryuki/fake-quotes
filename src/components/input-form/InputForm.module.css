@@ -22,6 +22,12 @@
   width: 100%;
 }
 
+.disabledField {
+  opacity: 0.78;
+  filter: grayscale(12%);
+  position: relative;
+}
+
 .labelTitle {
   display: block;
   color: #374151;
