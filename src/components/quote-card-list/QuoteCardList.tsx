@@ -1,34 +1,33 @@
-
-import styles from './quoteCardList.module.css'
-import { QuoteCardContainer } from "../quote-card/QuoteCardContainer";
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from 'swiper/modules';
+import { QuoteCardContainer } from "../quote-card/QuoteCardContainer";
+import styles from "./quoteCardList.module.css";
+
 type Props = {
 	generatedCards: QuoteCard[];
-}
+};
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import type { QuoteCard } from '../../types/types';
+import "swiper/css";
+import "swiper/css/navigation";
+import type { QuoteCard } from "../../types/types";
 
 export function QuoteCardList({ generatedCards }: Props) {
-
-    return (
-        <div className={styles.quoteCardListContainer}>
+	return (
+		<div className={styles.quoteCardListContainer}>
 			<Swiper
 				navigation={true}
 				modules={[Navigation]}
 				slidesPerView={1}
 				className={styles.swiper}
-				onSlideChange={() => console.log('slide change')}
+				onSlideChange={() => console.log("slide change")}
 				onSwiper={(swiper) => console.log(swiper)}
-				>
+			>
 				{generatedCards.map((_, index) => (
 					<SwiperSlide key={index} className={styles.swiperSlide}>
 						<QuoteCardContainer />
 					</SwiperSlide>
 				))}
-				</Swiper>
-        </div>
-    )
+			</Swiper>
+		</div>
+	);
 }

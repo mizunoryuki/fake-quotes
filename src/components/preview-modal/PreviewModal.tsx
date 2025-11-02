@@ -1,8 +1,7 @@
-
 type Props = {
 	isOpen: boolean;
 	onClose: () => void;
-}
+};
 
 export function PreviewModal({ isOpen, onClose }: Props) {
 	console.log({ isOpen });
@@ -12,5 +11,5 @@ export function PreviewModal({ isOpen, onClose }: Props) {
 			<h2>Preview</h2>
 			<p>This is a preview modal.</p>
 		</div>
-	)
+	);
 }
