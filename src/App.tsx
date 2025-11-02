@@ -16,24 +16,34 @@ function App() {
           <p className="app-description">あなたのためのオリジナル名言を生成します。</p>
         </div>
         <div className="mode-select">
-        <label className="mode-slect-label">
-          <input
-            type="radio"
-            value="quote"
-            checked={mode === "quote"}
-            onChange={(e) => setMode(e.target.value as "quote")}
-          />
-          名言 → 出典を生成
-        </label>
-        <label className="mode-select-label">
-          <input
-            type="radio"
-            value="source"
-            checked={mode === "source"}
-            onChange={(e) => setMode(e.target.value as "source")}
-          />
-          出典 → 名言を生成
-        </label>
+          <div className="mode-select-item">
+            <div className="mode-select-input">
+              <input
+                  type="radio"
+                  id='quote-mode'
+                  value="quote"
+                  aria-label='名言から出典を生成'
+                  checked={mode === "quote"}
+                  onChange={(e) => setMode(e.target.value as "quote")}
+                />
+            <label className="mode-select-label" htmlFor='quote-mode'>名言 → 出典を生成</label>
+            </div>
+            <span className="mode-select-description" aria-labelledby='quote-mode'>入力した名言から架空の出典を生成</span>
+          </div>
+          <div className="mode-select-item">
+            <div className="mode-select-input">
+              <input
+                  type="radio"
+                  id='source-mode'
+                  value="source"
+                  aria-label='出典から名言を生成'
+                checked={mode === "source"}
+                onChange={(e) => setMode(e.target.value as "source")}
+              />
+            <label className="mode-select-label" htmlFor='source-mode'>出典 → 名言を生成</label>
+            </div>
+            <span className="mode-select-description" aria-labelledby='source-mode'>入力した出典から架空の名言を生成</span>
+          </div>
       </div>
         <InputFormContainer mode={mode} />
       </div>
