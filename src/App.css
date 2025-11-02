@@ -29,3 +29,16 @@
   font-size: 13px;
   color: #6b7280; 
 }
+
+.mode-select {
+  display: flex;
+  flex-direction: column;
+  gap : 4px;
+  margin: 6px 0;
+}
+
+.mode-select-label {
+  display: flex;
+  align-items: center;
+  gap : 2px;
+}

@@ -1,13 +1,13 @@
 import styles from './InputForm.module.css';
 type Props = {
 	quote: string;
-	author: string;
+	source: string;
 	setQuote: (quote: string) => void;
-	setAuthor: (author: string) => void;
+	setSource: (source: string) => void;
 	onGenerate: () => void;
 }
 
-export function InputForm({ quote, author, setQuote, setAuthor, onGenerate }: Props) {
+export function InputForm({ quote, source, setQuote, setSource, onGenerate }: Props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.form}>
@@ -23,12 +23,12 @@ export function InputForm({ quote, author, setQuote, setAuthor, onGenerate }: Pr
 			</label>
 
 			<label className={styles.label}>
-				<span className={styles.labelTitle}>著者</span>
+				<span className={styles.labelTitle}>出典</span>
 				<input
-					value={author}
-					onChange={(e) => setAuthor(e.target.value)}
+					value={source}
+					onChange={(e) => setSource(e.target.value)}
 					className={styles.field}
-					placeholder="例：AI賢者・Lambda"
+					placeholder="例：民明書房"
 				/>
 			</label>
 

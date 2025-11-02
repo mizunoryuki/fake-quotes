@@ -3,29 +3,29 @@ import { InputForm } from "./InputForm";
 
 export function InputFormContainer() {
 	const [quote, setQuote] = useState(""); // 名言
-	const [author, setAuthor] = useState(""); // 著者
+	const [source, setSource] = useState(""); // 出典
 	const [imageReady, setImageReady] = useState(false);// 画像生成完了フラグ
 
 
 	const handleChangeQuote = (newQuote: string) => {
 		setQuote(newQuote);
 	};
-	const handleChangeAuthor = (newAuthor: string) => {
-		setAuthor(newAuthor);
+	const handleChangeSource = (newSource: string) => {
+		setSource(newSource);
 	};
 
 	const handleGenerate = () => {
-		if(quote || author){
+		if(quote || source){
 			// 画像生成処理をここに追加
-			console.log("Generating image for quote:", quote, "by author:", author);
+			console.log("Generating image for quote:", quote, "by source:", source);
 			// 生成完了後にフラグを更新
 			setImageReady(true);
 		} else {
-			alert("Please enter both quote and author.");
+			alert("Please enter both quote and source.");
 		}
 	}
 
 	return (
-		<InputForm quote={quote} author={author} setQuote={handleChangeQuote} setAuthor={handleChangeAuthor} onGenerate={handleGenerate} />
+		<InputForm quote={quote} source={source} setQuote={handleChangeQuote} setSource={handleChangeSource} onGenerate={handleGenerate} />
 	);
 }

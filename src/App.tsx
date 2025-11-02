@@ -2,10 +2,11 @@ import { useState } from 'react';
 import './App.css'
 import { InputFormContainer } from './components/input-form/InputFormContainer'
 import { QuoteCardListContainer } from './components/quote-card-list/QuoteCardListContainer'
-import type { QuoteCard } from './types/types';
+import type { InputMode, QuoteCard } from './types/types';
 
 function App() {
-  const [cards, setCards] = useState<QuoteCard[]>([]);
+  const [cards, setCards] = useState<QuoteCard[] | undefined>([]);
+  const [mode, setMode] = useState<InputMode>("quote");
 
   return (
     <>
@@ -14,9 +15,31 @@ function App() {
           <h1 className="app-title">名言生成</h1>
           <p className="app-description">あなたのためのオリジナル名言を生成します。</p>
         </div>
+        <div className="mode-select">
+        <label className="mode-slect-label">
+          <input
+            type="radio"
+            value="quote"
+            checked={mode === "quote"}
+            onChange={(e) => setMode(e.target.value as "quote")}
+          />
+          名言 → 出典を生成
+        </label>
+        <label className="mode-select-label">
+          <input
+            type="radio"
+            value="author"
+            checked={mode === "author"}
+            onChange={(e) => setMode(e.target.value as "author")}
+          />
+          出典 → 名言を生成
+        </label>
+      </div>
         <InputFormContainer/>
       </div>
-      <QuoteCardListContainer generatedCards={cards} />
+      {cards !== undefined ? 
+        <QuoteCardListContainer generatedCards={cards} /> : null
+      }
     </>
   )
 }
