@@ -15,7 +15,11 @@ export function QuoteCard({ ref, handleDownload }: Props) {
 				<p className={styles.subtitle}>note株式会社のミッション</p>
 			</div>
 
-			<button onClick={handleDownload} className={styles.downloadButton}>
+			<button
+				type="button"
+				onClick={handleDownload}
+				className={styles.downloadButton}
+			>
 				画像として保存
 			</button>
 		</div>

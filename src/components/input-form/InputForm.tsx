@@ -58,7 +58,7 @@ export function InputForm({
 				</label>
 
 				<div className={styles.actions}>
-					<button onClick={onGenerate} className={styles.button}>
+					<button type="button" onClick={onGenerate} className={styles.button}>
 						画像を生成する 🎨
 					</button>
 					<div className={styles.helper}>
