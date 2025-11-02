@@ -47,6 +47,17 @@
   box-shadow: 0 4px 12px rgba(37,99,235,0.12);
 }
 
+.field:disabled {
+  background: #f8fafc; 
+  color: #9ca3af;
+  border-color: #e6edf3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.disabledField .labelTitle {
+  color: #9ca3af;
+}
 .textarea {
   min-height: 72px;
   resize: vertical;

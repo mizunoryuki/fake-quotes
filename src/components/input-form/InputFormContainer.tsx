@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { InputForm } from "./InputForm";
+import type { InputMode } from "../../types/types";
 
-export function InputFormContainer() {
+type Props = {
+	mode : InputMode
+}
+
+export function InputFormContainer({ mode }: Props) {
 	const [quote, setQuote] = useState(""); // 名言
 	const [source, setSource] = useState(""); // 出典
 	const [imageReady, setImageReady] = useState(false);// 画像生成完了フラグ
@@ -26,6 +31,6 @@ export function InputFormContainer() {
 	}
 
 	return (
-		<InputForm quote={quote} source={source} setQuote={handleChangeQuote} setSource={handleChangeSource} onGenerate={handleGenerate} />
+		<InputForm quote={quote} source={source} setQuote={handleChangeQuote} setSource={handleChangeSource} onGenerate={handleGenerate} mode={mode} />
 	);
 }

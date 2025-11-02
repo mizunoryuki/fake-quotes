@@ -28,14 +28,14 @@ function App() {
         <label className="mode-select-label">
           <input
             type="radio"
-            value="author"
-            checked={mode === "author"}
-            onChange={(e) => setMode(e.target.value as "author")}
+            value="source"
+            checked={mode === "source"}
+            onChange={(e) => setMode(e.target.value as "source")}
           />
           出典 → 名言を生成
         </label>
       </div>
-        <InputFormContainer/>
+        <InputFormContainer mode={mode} />
       </div>
       {cards !== undefined ? 
         <QuoteCardListContainer generatedCards={cards} /> : null
