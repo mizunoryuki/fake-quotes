@@ -23,8 +23,8 @@ function App() {
 			{cards !== undefined ? (
 				<QuoteCardListContainer generatedCards={cards} />
 			) : (
-				<div>
-					<p className="app-example">作成例</p>
+				<div className="app-sample-container">
+					<h2 className="app-example">作成例</h2>
 					<QuoteCardContainer />
 				</div>
 			)}
