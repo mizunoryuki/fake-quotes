@@ -9,8 +9,6 @@ type Props = {
 export function InputFormContainer({ mode }: Props) {
 	const [quote, setQuote] = useState(""); // 名言
 	const [source, setSource] = useState(""); // 出典
-	const [imageReady, setImageReady] = useState(false); // 画像生成完了フラグ
-
 	const handleChangeQuote = (newQuote: string) => {
 		setQuote(newQuote);
 	};
@@ -19,13 +17,12 @@ export function InputFormContainer({ mode }: Props) {
 	};
 
 	const handleGenerate = () => {
-		if (quote || source) {
-			// 画像生成処理をここに追加
-			console.log("Generating image for quote:", quote, "by source:", source);
-			// 生成完了後にフラグを更新
-			setImageReady(true);
+		if (mode === "quote") {
+			console.log("Generating source for quote:", quote);
+			setSource("");
 		} else {
-			alert("Please enter both quote and source.");
+			console.log("Generating quote for source:", source);
+			setQuote("");
 		}
 	};
 
