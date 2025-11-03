@@ -1,4 +1,13 @@
 .quoteCardListContainer {
-	width: 800px;
-	margin: 100px auto 100px auto;
+	padding: 24px;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 100px 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.swiper {
+	width: 700px;
 }

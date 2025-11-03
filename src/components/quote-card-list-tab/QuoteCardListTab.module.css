@@ -23,3 +23,9 @@
 	height: 24px;
 	width: 24px;
 }
+
+.listContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}

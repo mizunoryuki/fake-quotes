@@ -29,7 +29,7 @@ export function QuoteCardListTab({ generatedCards, isOpen, onToggle }: Props) {
 				)}
 			</div>
 			{isOpen ? (
-				<div>
+				<div className={styles.listContainer}>
 					{generatedCards.map((value, index) => (
 						<QuoteCardContainer
 							key={index}
