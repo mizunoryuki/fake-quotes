@@ -8,10 +8,9 @@
 
 .quoteCardInner {
 	width: 100%;
-	max-width: 640px; /* keep cards readable on large screens */
+	max-width: 640px;
 	box-sizing: border-box;
 	padding: 20px;
-	margin-top: 24px;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
@@ -62,8 +61,6 @@
 }
 
 .downloadButton:active {
-	transition:
-		transform 120ms ease,
-		box-shadow 120ms ease,
-		opacity 120ms ease;
+	scale: 0.9;
+	transition: 0.6s;
 }
