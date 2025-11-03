@@ -4,12 +4,18 @@ import { HeaderContainer } from "./components/header/HeaderContainer";
 import { InputFormContainer } from "./components/input-form/InputFormContainer";
 import { QuoteCardContainer } from "./components/quote-card/QuoteCardContainer";
 import { QuoteCardListContainer } from "./components/quote-card-list/QuoteCardListContainer";
+import { QuoteCardListTabContainer } from "./components/quote-card-list-tab/QuoteCardListTabContainer";
 import type { InputMode, QuoteCardInput } from "./types/types";
 
 function App() {
 	const [cards, setCards] = useState<QuoteCardInput[] | undefined>(undefined);
 	const [mode, setMode] = useState<InputMode>("quote");
+	const [isOpen, setIsOpen] = useState(false);
 	const listRef = useRef<HTMLDivElement | null>(null);
+
+	const handleToggleList = () => {
+		setIsOpen(!isOpen);
+	};
 
 	const handleSetMode = (newMode: InputMode) => {
 		setMode(newMode);
@@ -53,6 +59,11 @@ function App() {
 			{cards !== undefined ? (
 				<div ref={listRef}>
 					<QuoteCardListContainer generatedCards={cards} />
+					<QuoteCardListTabContainer
+						generatedCards={cards}
+						isOpen={isOpen}
+						onToggle={handleToggleList}
+					/>
 				</div>
 			) : (
 				<div className="app-sample-container">
