@@ -3,13 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { QuoteCardInput } from "../../types/types";
 import { QuoteCardContainer } from "../quote-card/QuoteCardContainer";
 import styles from "./QuoteCardList.module.css";
+import "swiper/swiper-bundle.css";
 
 type Props = {
 	generatedCards: QuoteCardInput[];
 };
-
-import "swiper/css";
-import "swiper/css/navigation";
 
 export function QuoteCardList({ generatedCards }: Props) {
 	return (
