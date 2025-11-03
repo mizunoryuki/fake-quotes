@@ -22,14 +22,20 @@ function App() {
 		<>
 			<div className="app-header">
 				<HeaderContainer mode={mode} setMode={handleSetMode} />
-				<InputFormContainer mode={mode} setGeneratedCards={handleSetGeneratedCards} />
+				<InputFormContainer
+					mode={mode}
+					setGeneratedCards={handleSetGeneratedCards}
+				/>
 			</div>
 			{cards !== undefined ? (
 				<QuoteCardListContainer generatedCards={cards} />
 			) : (
 				<div className="app-sample-container">
 					<h2 className="app-example">作成例</h2>
-					<QuoteCardContainer />
+					<QuoteCardContainer
+						quote="夢を見続けることが、人生を豊かにする。"
+						source="— エッセイ『夢の習慣』 著：斎藤 湊 —"
+					/>
 				</div>
 			)}
 		</>
