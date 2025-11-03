@@ -11,7 +11,7 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 	const {
 		register,
 		handleSubmit,
-		formState: { isDirty, isSubmitting },
+		formState: { isSubmitting },
 		watch,
 	} = useForm<QuoteCardInput>({
 		defaultValues: {
@@ -79,7 +79,6 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 			onGenerate={handleSubmit(onSubmit)}
 			mode={mode}
 			register={register}
-			isDirty={isDirty}
 			isSubmitting={isSubmitting}
 			isGenerateDisabled={isGenerateDisabled}
 		/>
