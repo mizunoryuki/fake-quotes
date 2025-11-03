@@ -1,5 +1,5 @@
 export type QuoteCardInput = {
 	quote: string;
-	author: string;
+	source: string;
 };
 export type InputMode = "quote" | "source";

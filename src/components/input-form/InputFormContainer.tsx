@@ -1,12 +1,13 @@
 import { useState } from "react";
-import type { InputMode } from "../../types/types";
+import type { InputMode, QuoteCardInput } from "../../types/types";
 import { InputForm } from "./InputForm";
 
 type Props = {
 	mode: InputMode;
+	setGeneratedCards: (newCards: QuoteCardInput[]) => void;
 };
 
-export function InputFormContainer({ mode }: Props) {
+export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 	const [quote, setQuote] = useState(""); // 名言
 	const [source, setSource] = useState(""); // 出典
 	const handleChangeQuote = (newQuote: string) => {
@@ -29,7 +30,37 @@ export function InputFormContainer({ mode }: Props) {
 
 		const data = await response.json().catch(() => ({}));
 		if (response.ok) {
-			console.log("Generation result:", data.result);
+			const result = data.result;
+			const splitResults = result
+				.split("\n")
+				.map((line: string) => line.trim())
+				.filter((line: string) => line !== "");
+			console.log("Generation result:", splitResults);
+
+			if (!Array.isArray(splitResults)) {
+				console.warn("生成に失敗しました");
+				return;
+			}
+			if (splitResults.length === 0) {
+				console.warn("生成に失敗しました");
+				return;
+			}
+
+			if (mode === "quote") {
+				setGeneratedCards(
+					splitResults.map((quoteText: string) => ({
+						quote: quoteText,
+						source: source,
+					})),
+				);
+			} else {
+				setGeneratedCards(
+					splitResults.map((sourceText: string) => ({
+						quote: quote,
+						source: sourceText,
+					})),
+				);
+			}
 		} else {
 			console.error("Generation failed:", response.status, data);
 		}

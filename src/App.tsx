@@ -14,11 +14,15 @@ function App() {
 		setMode(newMode);
 	};
 
+	const handleSetGeneratedCards = (newCards: QuoteCardInput[]) => {
+		setCards(newCards);
+	};
+
 	return (
 		<>
 			<div className="app-header">
 				<HeaderContainer mode={mode} setMode={handleSetMode} />
-				<InputFormContainer mode={mode} />
+				<InputFormContainer mode={mode} setGeneratedCards={handleSetGeneratedCards} />
 			</div>
 			{cards !== undefined ? (
 				<QuoteCardListContainer generatedCards={cards} />

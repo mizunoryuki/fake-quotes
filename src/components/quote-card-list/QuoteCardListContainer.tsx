@@ -1,8 +1,8 @@
-import type { QuoteCard } from "../../types/types";
+import type { QuoteCardInput } from "../../types/types";
 import { QuoteCardList } from "./QuoteCardList";
 
 type Props = {
-	generatedCards: QuoteCard[];
+	generatedCards: QuoteCardInput[];
 };
 
 export function QuoteCardListContainer({ generatedCards }: Props) {
