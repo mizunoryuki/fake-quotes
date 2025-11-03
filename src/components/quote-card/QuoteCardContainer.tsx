@@ -5,9 +5,10 @@ import { QuoteCard } from "./QuoteCard";
 type Props = {
 	quote: string;
 	source: string;
+	isSample?: boolean;
 };
 
-export function QuoteCardContainer({ quote, source }: Props) {
+export function QuoteCardContainer({ quote, source,isSample=false }: Props) {
 	const ref = useRef(null);
 
 	const handleDownload = async () => {
@@ -19,5 +20,5 @@ export function QuoteCardContainer({ quote, source }: Props) {
 		link.click();
 	};
 
-	return <QuoteCard ref={ref} handleDownload={handleDownload} quote={quote} source={source} />;
+	return <QuoteCard ref={ref} handleDownload={handleDownload} quote={quote} source={source} isSample={isSample} />;
 }

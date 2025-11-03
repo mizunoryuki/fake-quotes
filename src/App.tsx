@@ -35,6 +35,7 @@ function App() {
 					<QuoteCardContainer
 						quote="夢を見続けることが、人生を豊かにする。"
 						source="— エッセイ『夢の習慣』 著：斎藤 湊 —"
+						isSample
 					/>
 				</div>
 			)}

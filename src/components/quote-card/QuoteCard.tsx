@@ -5,9 +5,16 @@ type Props = {
 	handleDownload: () => Promise<void>;
 	quote: string;
 	source: string;
+	isSample?: boolean;
 };
 
-export function QuoteCard({ ref, handleDownload, quote, source }: Props) {
+export function QuoteCard({
+	ref,
+	handleDownload,
+	quote,
+	source,
+	isSample,
+}: Props) {
 	return (
 		<div className={styles.quoteCardContainer}>
 			<div ref={ref} id="quote-card" className={styles.quoteCardInner}>
@@ -17,13 +24,15 @@ export function QuoteCard({ ref, handleDownload, quote, source }: Props) {
 				<p className={styles.subtitle}>{source}</p>
 			</div>
 
-			<button
-				type="button"
-				onClick={handleDownload}
-				className={styles.downloadButton}
-			>
-				画像として保存
-			</button>
+			{isSample !== true ? (
+				<button
+					type="button"
+					onClick={handleDownload}
+					className={styles.downloadButton}
+				>
+					画像として保存
+				</button>
+			) : null}
 		</div>
 	);
 }

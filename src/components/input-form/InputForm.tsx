@@ -65,7 +65,7 @@ export function InputForm({
 						className={styles.button}
 						disabled={!isDirty || isSubmitting}
 					>
-						画像を生成する
+						{isSubmitting ? "生成中..." : "生成する"}
 					</button>
 					<div className={styles.helper}>
 						生成した画像はダウンロードして共有できます。
