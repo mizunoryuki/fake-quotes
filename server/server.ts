@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
@@ -20,14 +20,13 @@ if (!apiKey) {
 	);
 	process.exit(1);
 }
-const genAI = new GoogleGenerativeAI(apiKey);
+const genAI = new GoogleGenAI({});
 
-// --- APIエンドポイント ---
 app.post("/api/generate", async (req, res) => {
 	const { mode, inputText } = req.body;
 
 	let prompt = "";
-	if (mode === "quote-to-author") {
+	if (mode === "quote") {
 		prompt = `
 あなたは架空の文化学者です。
 次の名言に合いそうな架空の出典や著者を提案してください。
@@ -39,7 +38,7 @@ app.post("/api/generate", async (req, res) => {
 出力形式：
 — 出典または著者名 —
 `;
-	} else if (mode === "author-to-quote") {
+	} else if (mode === "source") {
 		prompt = `
 あなたは架空の名言作家です。
 次の出典や人物にふさわしい架空の名言を提案してください。
@@ -51,13 +50,23 @@ app.post("/api/generate", async (req, res) => {
 「名言」
 `;
 	} else {
-		return res.status(400).json({ error: "Invalid mode" });
+		return res.status(400).json({ error: "Invalid mode", mode: mode });
 	}
 
 	try {
-		const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-		const result = await model.generateContent(prompt);
-		const text = result.response.text();
+		const result = await genAI.models.generateContent({
+			model: "gemini-2.5-flash",
+			contents: prompt,
+		});
+
+		console.log(result);
+
+		if (result.text === undefined) {
+			return res.status(500).json({ error: "生成に失敗しました。" });
+		}
+
+		const text = result.text;
+		console.log(text);
 		res.json({ result: text });
 	} catch (error) {
 		console.error("Gemini API Error:", error);

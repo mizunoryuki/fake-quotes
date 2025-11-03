@@ -16,13 +16,22 @@ export function InputFormContainer({ mode }: Props) {
 		setSource(newSource);
 	};
 
-	const handleGenerate = () => {
-		if (mode === "quote") {
-			console.log("Generating source for quote:", quote);
-			setSource("");
+	const handleGenerate = async () => {
+		const inputText = mode === "quote" ? quote : source;
+
+		const response = await fetch("/api/generate", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ mode: mode, inputText }),
+		});
+
+		const data = await response.json().catch(() => ({}));
+		if (response.ok) {
+			console.log("Generation result:", data.result);
 		} else {
-			console.log("Generating quote for source:", source);
-			setQuote("");
+			console.error("Generation failed:", response.status, data);
 		}
 	};
 

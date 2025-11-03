@@ -6,6 +6,10 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
+		"build:server": "tsc -p server/tsconfig.server.json",
+		"start:server": "node dist-server/server.js",
+		"dev:server": "ts-node server/server.ts",
+		"start": "node dist-server/server.js & pnpm run dev",
 		"lint": "eslint .",
 		"preview": "vite preview",
 		"biome:check": "exec biome check --write",
@@ -13,7 +17,7 @@
 		"biome:format": "exec biome format --write"
 	},
 	"dependencies": {
-		"@google/generative-ai": "^0.24.1",
+		"@google/genai": "^1.28.0",
 		"cors": "^2.8.5",
 		"dotenv": "^17.2.3",
 		"express": "^5.1.0",
