@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export function QuoteCardList({ generatedCards }: Props) {
+	console.log(generatedCards);
 	return (
 		<div className={styles.quoteCardListContainer}>
 			<Swiper
@@ -22,9 +23,9 @@ export function QuoteCardList({ generatedCards }: Props) {
 				onSlideChange={() => console.log("slide change")}
 				onSwiper={(swiper) => console.log(swiper)}
 			>
-				{generatedCards.map((_, index) => (
+				{generatedCards.map((value, index) => (
 					<SwiperSlide key={index} className={styles.swiperSlide}>
-						<QuoteCardContainer />
+						<QuoteCardContainer quote={value.quote} source={value.source} />
 					</SwiperSlide>
 				))}
 			</Swiper>

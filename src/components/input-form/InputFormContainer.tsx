@@ -48,16 +48,16 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 
 			if (mode === "quote") {
 				setGeneratedCards(
-					splitResults.map((quoteText: string) => ({
-						quote: quoteText,
-						source: source,
+					splitResults.map((sourceText: string) => ({
+						quote: quote,
+						source: sourceText,
 					})),
 				);
 			} else {
 				setGeneratedCards(
-					splitResults.map((sourceText: string) => ({
-						quote: quote,
-						source: sourceText,
+					splitResults.map((quoteText: string) => ({
+						quote: quoteText,
+						source: source,
 					})),
 				);
 			}

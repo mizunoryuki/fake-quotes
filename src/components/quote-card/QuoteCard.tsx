@@ -3,18 +3,18 @@ import styles from "./quoteCard.module.css";
 type Props = {
 	ref: React.RefObject<null>;
 	handleDownload: () => Promise<void>;
+	quote: string;
+	source: string;
 };
 
-export function QuoteCard({ ref, handleDownload }: Props) {
+export function QuoteCard({ ref, handleDownload, quote, source }: Props) {
 	return (
 		<div className={styles.quoteCardContainer}>
 			<div ref={ref} id="quote-card" className={styles.quoteCardInner}>
 				<div className={styles.quoteCard}>
-					<p className={styles.quoteText}>
-						だれもが創作をはじめ、続けられるようにする。
-					</p>
+					<p className={styles.quoteText}>{quote}</p>
 				</div>
-				<p className={styles.subtitle}>note株式会社のミッション</p>
+				<p className={styles.subtitle}>{source}</p>
 			</div>
 
 			<button

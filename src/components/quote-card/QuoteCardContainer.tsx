@@ -2,7 +2,12 @@ import { toPng } from "html-to-image";
 import { useRef } from "react";
 import { QuoteCard } from "./QuoteCard";
 
-export function QuoteCardContainer() {
+type Props = {
+	quote: string;
+	source: string;
+};
+
+export function QuoteCardContainer({ quote, source }: Props) {
 	const ref = useRef(null);
 
 	const handleDownload = async () => {
@@ -14,5 +19,5 @@ export function QuoteCardContainer() {
 		link.click();
 	};
 
-	return <QuoteCard ref={ref} handleDownload={handleDownload} />;
+	return <QuoteCard ref={ref} handleDownload={handleDownload} quote={quote} source={source} />;
 }
