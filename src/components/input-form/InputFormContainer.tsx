@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import type { InputMode, QuoteCardInput } from "../../types/types";
 import { InputForm } from "./InputForm";
 
@@ -8,17 +8,19 @@ type Props = {
 };
 
 export function InputFormContainer({ mode, setGeneratedCards }: Props) {
-	const [quote, setQuote] = useState(""); // 名言
-	const [source, setSource] = useState(""); // 出典
-	const handleChangeQuote = (newQuote: string) => {
-		setQuote(newQuote);
-	};
-	const handleChangeSource = (newSource: string) => {
-		setSource(newSource);
-	};
+	const {
+		register,
+		handleSubmit,
+		formState: { isDirty, isSubmitting },
+	} = useForm<QuoteCardInput>({
+		defaultValues: {
+			quote: "",
+			source: "",
+		},
+	});
 
-	const handleGenerate = async () => {
-		const inputText = mode === "quote" ? quote : source;
+	const onSubmit = async (values: QuoteCardInput) => {
+		const inputText = mode === "quote" ? values.quote : values.source;
 
 		const response = await fetch("/api/generate", {
 			method: "POST",
@@ -37,11 +39,7 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 				.filter((line: string) => line !== "");
 			console.log("Generation result:", splitResults);
 
-			if (!Array.isArray(splitResults)) {
-				console.warn("生成に失敗しました");
-				return;
-			}
-			if (splitResults.length === 0) {
+			if (!Array.isArray(splitResults) || splitResults.length === 0) {
 				console.warn("生成に失敗しました");
 				return;
 			}
@@ -49,7 +47,7 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 			if (mode === "quote") {
 				setGeneratedCards(
 					splitResults.map((sourceText: string) => ({
-						quote: quote,
+						quote: values.quote,
 						source: sourceText,
 					})),
 				);
@@ -57,7 +55,7 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 				setGeneratedCards(
 					splitResults.map((quoteText: string) => ({
 						quote: quoteText,
-						source: source,
+						source: values.source,
 					})),
 				);
 			}
@@ -68,12 +66,11 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 
 	return (
 		<InputForm
-			quote={quote}
-			source={source}
-			setQuote={handleChangeQuote}
-			setSource={handleChangeSource}
-			onGenerate={handleGenerate}
+			onGenerate={handleSubmit(onSubmit)}
 			mode={mode}
+			register={register}
+			isDirty={isDirty}
+			isSubmitting={isSubmitting}
 		/>
 	);
 }

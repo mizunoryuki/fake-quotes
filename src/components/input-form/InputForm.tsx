@@ -1,29 +1,31 @@
-import type { InputMode } from "../../types/types";
+import type { UseFormRegister } from "react-hook-form";
+import type { InputMode, QuoteCardInput } from "../../types/types";
 import styles from "./InputForm.module.css";
 
 type Props = {
-	quote: string;
-	source: string;
-	setQuote: (quote: string) => void;
-	setSource: (source: string) => void;
+	register: UseFormRegister<QuoteCardInput>;
 	onGenerate: () => void;
 	mode: InputMode;
+	isDirty: boolean;
+	isSubmitting: boolean;
 };
 
 export function InputForm({
-	quote,
-	source,
-	setQuote,
-	setSource,
+	register,
 	onGenerate,
 	mode,
+	isDirty,
+	isSubmitting,
 }: Props) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.form}>
-				<h2>{mode === "quote" ? "出典を生成" : "名言を生成"}</h2>
+			<h2>{mode === "quote" ? "出典を生成" : "名言を生成"}</h2>
+			<form onSubmit={onGenerate} className={styles.form}>
 				<label
-					className={`${styles.label} ${mode === "source" ? styles.disabledField : ""}`}
+					className={`${styles.label} ${
+						mode === "source" ? styles.disabledField : ""
+					}
+					}`}
 					htmlFor="quote-input"
 					aria-disabled={mode === "source"}
 				>
@@ -31,8 +33,7 @@ export function InputForm({
 					<textarea
 						id="quote-input"
 						aria-label="名言"
-						value={quote}
-						onChange={(e) => setQuote(e.target.value)}
+						{...register("quote")}
 						className={`${styles.field} ${styles.textarea}`}
 						disabled={mode === "source"}
 						rows={3}
@@ -41,7 +42,9 @@ export function InputForm({
 				</label>
 
 				<label
-					className={`${styles.label} ${mode === "quote" ? styles.disabledField : ""}`}
+					className={`${styles.label} ${
+						mode === "quote" ? styles.disabledField : ""
+					}`}
 					htmlFor="source-input"
 					aria-disabled={mode === "quote"}
 				>
@@ -49,8 +52,7 @@ export function InputForm({
 					<input
 						id="source-input"
 						aria-label="出典"
-						value={source}
-						onChange={(e) => setSource(e.target.value)}
+						{...register("source")}
 						className={styles.field}
 						placeholder="例：民明書房"
 						disabled={mode === "quote"}
@@ -58,14 +60,18 @@ export function InputForm({
 				</label>
 
 				<div className={styles.actions}>
-					<button type="button" onClick={onGenerate} className={styles.button}>
-						画像を生成する 🎨
+					<button
+						type="submit"
+						className={styles.button}
+						disabled={!isDirty || isSubmitting}
+					>
+						画像を生成する
 					</button>
 					<div className={styles.helper}>
 						生成した画像はダウンロードして共有できます。
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	);
 }
