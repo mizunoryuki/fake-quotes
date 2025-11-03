@@ -23,6 +23,7 @@ function App() {
 
 	const handleSetGeneratedCards = (newCards: QuoteCardInput[]) => {
 		setCards(newCards);
+		setIsOpen(false);
 	};
 
 	useEffect(() => {

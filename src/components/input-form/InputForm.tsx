@@ -6,16 +6,16 @@ type Props = {
 	register: UseFormRegister<QuoteCardInput>;
 	onGenerate: () => void;
 	mode: InputMode;
-	isDirty: boolean;
 	isSubmitting: boolean;
+	isGenerateDisabled?: boolean;
 };
 
 export function InputForm({
 	register,
 	onGenerate,
 	mode,
-	isDirty,
 	isSubmitting,
+	isGenerateDisabled,
 }: Props) {
 	return (
 		<div className={styles.container}>
@@ -63,7 +63,8 @@ export function InputForm({
 					<button
 						type="submit"
 						className={styles.button}
-						disabled={!isDirty || isSubmitting}
+						disabled={isGenerateDisabled}
+						aria-disabled={isGenerateDisabled}
 					>
 						{isSubmitting ? "生成中..." : "生成する"}
 					</button>
