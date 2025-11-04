@@ -59,7 +59,7 @@ function App() {
 					<QuoteCardListTabContainer
 						generatedCards={cards}
 						isOpen={isOpen}
-						onToggle={handleToggleList}
+						setIsOpen={setIsOpen}
 					/>
 				</div>
 			) : (

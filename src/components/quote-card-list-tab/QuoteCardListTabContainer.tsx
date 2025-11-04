@@ -4,14 +4,18 @@ import { QuoteCardListTab } from "./QuoteCardListTab";
 type Props = {
 	generatedCards: QuoteCardInput[];
 	isOpen: boolean;
-	onToggle: (open?: boolean) => void;
+	setIsOpen: (open: boolean) => void;
 };
 
 export function QuoteCardListTabContainer({
 	generatedCards,
 	isOpen,
-	onToggle,
+	setIsOpen,
 }: Props) {
+	const onToggle = () => {
+		setIsOpen(!isOpen);
+	};
+
 	return (
 		<QuoteCardListTab
 			generatedCards={generatedCards}
