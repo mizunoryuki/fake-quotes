@@ -67,3 +67,9 @@ pnpm run preview
 modeはinputされたテキストの種類を指定しています。
 modeがquoteなら、inputの値として言葉を指定している。この時、APIから返される値は著者や出典。
 modeがsourceなら、inputの値として著者や出典している。この時、APIから返される値は言葉。
+
+## サーバーのセットアップ
+
+ローカル環境で開発する場合は
+
+`pnpm run build:server`によりtsファイルをjsに変換して、サーバーを立ち上げるようにしてください。
