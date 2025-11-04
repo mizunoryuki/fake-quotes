@@ -2,4 +2,4 @@
 
 npx lint-staged
 
-echo "✅ Biome checks finished!"
+echo "✅ Biome checks finished! ✅"
