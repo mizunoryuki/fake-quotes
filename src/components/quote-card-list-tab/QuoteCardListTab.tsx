@@ -23,16 +23,16 @@ export function QuoteCardListTab({ generatedCards, isOpen, onToggle }: Props) {
 				) : (
 					<IoIosArrowUp
 						role="button"
-						onClick={onToggle}
+						onClick={() => onToggle?.()}
 						className={styles.button}
 					/>
 				)}
 			</div>
 			{isOpen ? (
 				<div className={styles.listContainer}>
-					{generatedCards.map((value, index) => (
+					{generatedCards.map((value) => (
 						<QuoteCardContainer
-							key={index}
+							key={`${value.quote}::${value.source}`}
 							quote={value.quote}
 							source={value.source}
 						/>

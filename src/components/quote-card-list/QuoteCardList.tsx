@@ -18,11 +18,14 @@ export function QuoteCardList({ generatedCards }: Props) {
 				slidesPerView={1}
 				className={styles.swiper}
 			>
-				{generatedCards.map((value, index) => (
-					<SwiperSlide key={index} className={styles.swiperSlide}>
-						<QuoteCardContainer quote={value.quote} source={value.source} />
-					</SwiperSlide>
-				))}
+				{generatedCards.map((value) => {
+					const key = `${value.quote}::${value.source}`;
+					return (
+						<SwiperSlide key={key} className={styles.swiperSlide}>
+							<QuoteCardContainer quote={value.quote} source={value.source} />
+						</SwiperSlide>
+					);
+				})}
 			</Swiper>
 		</div>
 	);
