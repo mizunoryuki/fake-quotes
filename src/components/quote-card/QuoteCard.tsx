@@ -1,4 +1,4 @@
-import styles from "./quoteCard.module.css";
+import styles from "./QuoteCard.module.css";
 
 type Props = {
 	ref: React.RefObject<null>;
