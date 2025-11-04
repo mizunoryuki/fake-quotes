@@ -62,11 +62,9 @@ app.post("/api/generate", async (req, res) => {
 		- 余計な文章や説明を一切含めない
 
 		出力例：
-		[
 		人生は常に書き換え可能なプログラムである。
 		失敗は、学習データの一部にすぎない。
 		未来を決定するのは、今この瞬間の入力値だ。
-		]
 `;
 	} else {
 		return res.status(400).json({ error: "Invalid mode", mode: mode });

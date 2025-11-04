@@ -22,8 +22,25 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 
 	const onSubmit = async (values: QuoteCardInput) => {
 		const inputText = mode === "quote" ? values.quote : values.source;
+		const env = import.meta.env as Record<string, unknown>;
+		if (!env.VITE_API_URL) {
+			console.warn(
+				"VITE_API_URL is not set in import.meta.env — falling back to relative '/api/generate'. If you expect an external API, set VITE_API_URL in your .env (no spaces around =).",
+			);
+		}
+		const viteApi =
+			typeof env.VITE_API_URL === "string"
+				? (env.VITE_API_URL as string).trim()
+				: undefined;
+		let generateEndpoint = "/api/generate";
+		if (viteApi && viteApi.length > 0) {
+			const cleaned = viteApi.replace(/\/+$/, "");
+			generateEndpoint = cleaned.endsWith("/api/generate")
+				? cleaned
+				: `${cleaned}/api/generate`;
+		}
 
-		const response = await fetch("/api/generate", {
+		const response = await fetch(generateEndpoint, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
