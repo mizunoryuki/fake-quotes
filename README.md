@@ -3,6 +3,11 @@
 シンプルな「名言 / 出典」ジェネレーター React アプリケーション。
 Vite + React + TypeScript で構成され、生成API（外部 Worker / サーバー）へリクエストして画像を作成・ダウンロードできます。
 
+## デプロイ先
+
+Cloudflare pagesでデプロイしています。
+https://fake-quotes.pages.dev/
+
 ## 概要
 
 このプロジェクトはフロントエンド（Vite）でユーザーが「名言」や「出典」を入力し、外部APIに投げて候補を生成するフローを持ちます。
