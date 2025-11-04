@@ -8,6 +8,7 @@ type Props = {
 	mode: InputMode;
 	isSubmitting: boolean;
 	isGenerateDisabled?: boolean;
+	errorMessage?: string;
 };
 
 export function InputForm({
@@ -16,6 +17,7 @@ export function InputForm({
 	mode,
 	isSubmitting,
 	isGenerateDisabled,
+	errorMessage,
 }: Props) {
 	return (
 		<div className={styles.container}>
@@ -58,6 +60,12 @@ export function InputForm({
 						disabled={mode === "quote"}
 					/>
 				</label>
+
+				{errorMessage ? (
+					<p className={styles.errorMessage} role="alert">
+						{errorMessage}
+					</p>
+				) : null}
 
 				<div className={styles.actions}>
 					<button

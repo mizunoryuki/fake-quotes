@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { InputMode, QuoteCardInput } from "../../types/types";
 import { InputForm } from "./InputForm";
@@ -8,6 +9,7 @@ type Props = {
 };
 
 export function InputFormContainer({ mode, setGeneratedCards }: Props) {
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const {
 		register,
 		handleSubmit,
@@ -21,64 +23,77 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 	});
 
 	const onSubmit = async (values: QuoteCardInput) => {
-		const inputText = mode === "quote" ? values.quote : values.source;
-		const env = import.meta.env as Record<string, unknown>;
-		if (!env.VITE_API_URL) {
-			console.warn(
-				"VITE_API_URL is not set in import.meta.env — falling back to relative '/api/generate'. If you expect an external API, set VITE_API_URL in your .env (no spaces around =).",
-			);
-		}
-		const viteApi =
-			typeof env.VITE_API_URL === "string"
-				? (env.VITE_API_URL as string).trim()
-				: undefined;
-		let generateEndpoint = "/api/generate";
-		if (viteApi && viteApi.length > 0) {
-			const cleaned = viteApi.replace(/\/+$/, "");
-			generateEndpoint = cleaned.endsWith("/api/generate")
-				? cleaned
-				: `${cleaned}/api/generate`;
-		}
+		setErrorMessage(null); // 送信前にエラーをリセット
 
-		const response = await fetch(generateEndpoint, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ mode: mode, inputText }),
-		});
+		try {
+			const inputText = mode === "quote" ? values.quote : values.source;
+			const env = import.meta.env as Record<string, unknown>;
+			const viteApi =
+				typeof env.VITE_API_URL === "string"
+					? env.VITE_API_URL.trim()
+					: undefined;
 
-		const data = await response.json().catch(() => ({}));
-		if (response.ok) {
+			let generateEndpoint = "/api/generate";
+			if (viteApi && viteApi.length > 0) {
+				const cleaned = viteApi.replace(/\/+$/, "");
+				generateEndpoint = cleaned.endsWith("/api/generate")
+					? cleaned
+					: `${cleaned}/api/generate`;
+			}
+
+			const response = await fetch(generateEndpoint, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ mode, inputText }),
+			});
+
+			const data = await response.json().catch(() => ({}));
+
+			if (!response.ok) {
+				console.error("Generation failed:", response.status, data);
+				const apiError =
+					data?.error ||
+					`サーバーエラーが発生しました (status: ${response.status})`;
+				setErrorMessage(apiError);
+				return;
+			}
+
 			const result = data.result;
+			if (!result || typeof result !== "string") {
+				setErrorMessage("生成結果が不正です。もう一度お試しください。");
+				return;
+			}
+
 			const splitResults = result
 				.split("\n")
 				.map((line: string) => line.trim())
 				.filter((line: string) => line !== "");
-			console.log("Generation result:", splitResults);
 
-			if (!Array.isArray(splitResults) || splitResults.length === 0) {
-				console.warn("生成に失敗しました");
+			if (splitResults.length === 0) {
+				setErrorMessage("生成に失敗しました。入力内容を確認してください。");
 				return;
 			}
 
 			if (mode === "quote") {
 				setGeneratedCards(
-					splitResults.map((sourceText: string) => ({
+					splitResults.map((sourceText) => ({
 						quote: values.quote,
 						source: sourceText,
 					})),
 				);
 			} else {
 				setGeneratedCards(
-					splitResults.map((quoteText: string) => ({
+					splitResults.map((quoteText) => ({
 						quote: quoteText,
 						source: values.source,
 					})),
 				);
 			}
-		} else {
-			console.error("Generation failed:", response.status, data);
+		} catch (err) {
+			console.error("Network error:", err);
+			setErrorMessage(
+				"ネットワークエラーが発生しました。接続を確認してください。",
+			);
 		}
 	};
 
@@ -98,6 +113,7 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 			register={register}
 			isSubmitting={isSubmitting}
 			isGenerateDisabled={isGenerateDisabled}
+			errorMessage={errorMessage}
 		/>
 	);
 }

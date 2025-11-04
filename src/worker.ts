@@ -77,10 +77,7 @@ app.post("/api/generate", async (c) => {
 
 		if (!resp.ok) {
 			const errText = await resp.text();
-			return c.json(
-				{ error: `Gemini API error: ${resp.status} ${errText}` },
-				500,
-			);
+			return c.json({ error: errText }, 500);
 		}
 
 		const data = await resp.json();
