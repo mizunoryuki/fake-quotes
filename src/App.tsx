@@ -11,11 +11,6 @@ function App() {
 	const [cards, setCards] = useState<QuoteCardInput[] | undefined>(undefined);
 	const [mode, setMode] = useState<InputMode>("quote");
 	const [isOpen, setIsOpen] = useState(false);
-	const listRef = useRef<HTMLDivElement | null>(null);
-
-	const handleToggleList = () => {
-		setIsOpen(!isOpen);
-	};
 
 	const handleSetGeneratedCards = (newCards: QuoteCardInput[]) => {
 		setCards(newCards);
@@ -54,7 +49,7 @@ function App() {
 				/>
 			</div>
 			{cards !== undefined ? (
-				<div ref={listRef}>
+				<div>
 					<QuoteCardListContainer generatedCards={cards} />
 					<QuoteCardListTabContainer
 						generatedCards={cards}
