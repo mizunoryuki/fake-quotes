@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import type { InputMode } from "../../types/types";
 import { Header } from "./Header";
 
@@ -7,5 +8,12 @@ type Props = {
 };
 
 export function HeaderContainer({ mode, setMode }: Props) {
-	return <Header mode={mode} setMode={setMode} />;
+	const handleSetMode = useCallback(
+		(newMode: InputMode) => {
+			setMode(newMode);
+		},
+		[setMode],
+	);
+
+	return <Header mode={mode} setMode={handleSetMode} />;
 }

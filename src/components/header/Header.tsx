@@ -22,12 +22,13 @@ export function Header({ mode, setMode }: Props) {
 						<input
 							className={styles.radio}
 							type="radio"
+							name="mode"
 							id="quote-mode"
 							value="quote"
 							aria-label="名言から出典を生成"
 							aria-describedby="quote-mode-desc"
 							checked={mode === "quote"}
-							onChange={(e) => setMode(e.target.value as "quote")}
+							onChange={(e) => setMode(e.currentTarget.value as InputMode)}
 						/>
 						<label className={styles.modeSelectLabel} htmlFor="quote-mode">
 							名言 → 出典を生成
@@ -43,12 +44,13 @@ export function Header({ mode, setMode }: Props) {
 						<input
 							className={styles.radio}
 							type="radio"
+							name="mode"
 							id="source-mode"
 							value="source"
 							aria-label="出典から名言を生成"
 							aria-describedby="source-mode-desc"
 							checked={mode === "source"}
-							onChange={(e) => setMode(e.target.value as "source")}
+							onChange={(e) => setMode(e.currentTarget.value as InputMode)}
 						/>
 						<label className={styles.modeSelectLabel} htmlFor="source-mode">
 							出典 → 名言を生成

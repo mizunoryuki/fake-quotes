@@ -17,10 +17,6 @@ function App() {
 		setIsOpen(!isOpen);
 	};
 
-	const handleSetMode = (newMode: InputMode) => {
-		setMode(newMode);
-	};
-
 	const handleSetGeneratedCards = (newCards: QuoteCardInput[]) => {
 		setCards(newCards);
 		setIsOpen(false);
@@ -51,7 +47,7 @@ function App() {
 	return (
 		<>
 			<div className="app-header">
-				<HeaderContainer mode={mode} setMode={handleSetMode} />
+				<HeaderContainer mode={mode} setMode={setMode} />
 				<InputFormContainer
 					mode={mode}
 					setGeneratedCards={handleSetGeneratedCards}
