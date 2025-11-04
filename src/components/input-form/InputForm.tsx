@@ -73,12 +73,12 @@ export function InputForm({
 						disabled={mode === "quote"}
 					/>
 				</label>
-				{inputErrors.quote ? (
+				{inputErrors.quote && mode === "quote" ? (
 					<p className={styles.errorMessage} role="alert">
 						{inputErrors.quote.message}
 					</p>
 				) : null}
-				{inputErrors.source ? (
+				{inputErrors.source && mode === "source" ? (
 					<p className={styles.errorMessage} role="alert">
 						{inputErrors.source.message}
 					</p>
