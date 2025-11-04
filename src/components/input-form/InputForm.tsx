@@ -1,4 +1,4 @@
-import type { UseFormRegister } from "react-hook-form";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import type { InputMode, QuoteCardInput } from "../../types/types";
 import styles from "./InputForm.module.css";
 
@@ -9,6 +9,7 @@ type Props = {
 	isSubmitting: boolean;
 	isGenerateDisabled?: boolean;
 	errorMessage?: string | null;
+	inputErrors: FieldErrors<QuoteCardInput>;
 };
 
 export function InputForm({
@@ -18,6 +19,7 @@ export function InputForm({
 	isSubmitting,
 	isGenerateDisabled,
 	errorMessage,
+	inputErrors,
 }: Props) {
 	return (
 		<div className={styles.container}>
@@ -35,14 +37,19 @@ export function InputForm({
 					<textarea
 						id="quote-input"
 						aria-label="名言"
-						{...register("quote")}
+						{...register("quote", {
+							maxLength: {
+								value: 60,
+								message: "60文字以内で入力してください",
+							},
+							required: mode === "quote" ? "名言を入力してください" : false,
+						})}
 						className={`${styles.field} ${styles.textarea}`}
 						disabled={mode === "source"}
 						rows={3}
 						placeholder="例：人生は一度きり、でもリロードはできる。"
 					/>
 				</label>
-
 				<label
 					className={`${styles.label} ${
 						mode === "quote" ? styles.disabledField : ""
@@ -54,13 +61,28 @@ export function InputForm({
 					<input
 						id="source-input"
 						aria-label="出典"
-						{...register("source")}
+						{...register("source", {
+							maxLength: {
+								value: 60,
+								message: "60文字以内で入力してください",
+							},
+							required: mode === "source" ? "出典を入力してください" : false,
+						})}
 						className={styles.field}
 						placeholder="例：民明書房"
 						disabled={mode === "quote"}
 					/>
 				</label>
-
+				{inputErrors.quote ? (
+					<p className={styles.errorMessage} role="alert">
+						{inputErrors.quote.message}
+					</p>
+				) : null}
+				{inputErrors.source ? (
+					<p className={styles.errorMessage} role="alert">
+						{inputErrors.source.message}
+					</p>
+				) : null}
 				{errorMessage !== null && errorMessage !== undefined ? (
 					<p className={styles.errorMessage} role="alert">
 						{errorMessage}

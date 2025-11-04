@@ -112,6 +112,11 @@
 	}
 }
 
+.errorMessage {
+	font-size: 13px;
+	color: red;
+}
+
 .helper {
 	margin-top: 8px;
 	font-size: 13px;

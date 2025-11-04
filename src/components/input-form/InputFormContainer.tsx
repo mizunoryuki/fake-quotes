@@ -13,13 +13,14 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 	const {
 		register,
 		handleSubmit,
-		formState: { isSubmitting },
+		formState: { isSubmitting, errors },
 		watch,
 	} = useForm<QuoteCardInput>({
 		defaultValues: {
 			quote: "",
 			source: "",
 		},
+		mode: "onChange",
 	});
 
 	const onSubmit = async (values: QuoteCardInput) => {
@@ -104,7 +105,11 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 		(mode === "quote" && (!quoteValue || quoteValue.trim() === "")) ||
 		(mode === "source" && (!sourceValue || sourceValue.trim() === ""));
 
-	const isGenerateDisabled = isSubmitting || requiredEmpty;
+	const isGenerateDisabled =
+		isSubmitting ||
+		requiredEmpty ||
+		(errors.quote && mode === "quote") ||
+		(errors.source && mode === "source");
 
 	return (
 		<InputForm
@@ -114,6 +119,7 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 			isSubmitting={isSubmitting}
 			isGenerateDisabled={isGenerateDisabled}
 			errorMessage={errorMessage}
+			inputErrors={errors}
 		/>
 	);
 }
