@@ -23,7 +23,7 @@ export function InputFormContainer({ mode, setGeneratedCards }: Props) {
 	});
 
 	const onSubmit = async (values: QuoteCardInput) => {
-		setErrorMessage(null); // 送信前にエラーをリセット
+		setErrorMessage(null);
 
 		try {
 			const inputText = mode === "quote" ? values.quote : values.source;

@@ -8,7 +8,7 @@ type Props = {
 	mode: InputMode;
 	isSubmitting: boolean;
 	isGenerateDisabled?: boolean;
-	errorMessage?: string;
+	errorMessage?: string | null;
 };
 
 export function InputForm({
@@ -61,7 +61,7 @@ export function InputForm({
 					/>
 				</label>
 
-				{errorMessage ? (
+				{errorMessage !== null && errorMessage !== undefined ? (
 					<p className={styles.errorMessage} role="alert">
 						{errorMessage}
 					</p>

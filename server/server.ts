@@ -18,6 +18,14 @@ if (!apiKey) {
 }
 const genAI = new GoogleGenAI({});
 
+type ResponseError = {
+	error: {
+		code: string;
+		message: string;
+		status: string;
+	};
+};
+
 app.post("/api/generate", async (req, res) => {
 	const { mode, inputText } = req.body;
 
@@ -82,7 +90,9 @@ app.post("/api/generate", async (req, res) => {
 		console.log(text);
 		res.json({ result: text });
 	} catch (error) {
-		console.error("Gemini API Error:", error);
+		const responseError = error as ResponseError;
+
+		console.error(responseError.error.message);
 		res.status(500).json({ error: "生成に失敗しました。" });
 	}
 });
