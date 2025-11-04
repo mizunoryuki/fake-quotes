@@ -1,9 +1,9 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { GoogleGenAI } from "@google/genai";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -95,7 +95,7 @@ app.post("/api/generate", async (req, res) => {
 const distPath = path.join(__dirname, "../dist");
 app.use(express.static(distPath));
 
-app.get(/.*/, (req, res) => {
+app.get(/.*/, (_, res) => {
 	res.sendFile(path.join(distPath, "index.html"));
 });
 

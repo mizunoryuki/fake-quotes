@@ -90,9 +90,13 @@ app.post("/api/generate", async (c) => {
 			"生成に失敗しました。";
 
 		return c.json({ result: text });
-	} catch (err: any) {
+	} catch (err) {
 		console.error("Error:", err);
-		return c.json({ error: err.message || "Unknown error" }, 500);
+
+		if (err instanceof Error) {
+			return c.json({ error: err.message || "Unknown error" }, 500);
+		}
+		return c.json({ error: "Unknown error" }, 500);
 	}
 });
 

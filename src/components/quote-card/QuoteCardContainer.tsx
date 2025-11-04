@@ -8,7 +8,7 @@ type Props = {
 	isSample?: boolean;
 };
 
-export function QuoteCardContainer({ quote, source,isSample=false }: Props) {
+export function QuoteCardContainer({ quote, source, isSample = false }: Props) {
 	const ref = useRef(null);
 
 	const handleDownload = async () => {
@@ -20,5 +20,13 @@ export function QuoteCardContainer({ quote, source,isSample=false }: Props) {
 		link.click();
 	};
 
-	return <QuoteCard ref={ref} handleDownload={handleDownload} quote={quote} source={source} isSample={isSample} />;
+	return (
+		<QuoteCard
+			ref={ref}
+			handleDownload={handleDownload}
+			quote={quote}
+			source={source}
+			isSample={isSample}
+		/>
+	);
 }
