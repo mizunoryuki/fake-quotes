@@ -14,7 +14,8 @@
 		"preview": "vite preview",
 		"biome:check": "exec biome check --write",
 		"biome:lint": "exec biome lint  --write",
-		"biome:format": "exec biome format --write"
+		"biome:format": "exec biome format --write",
+		"prepare": "husky install"
 	},
 	"dependencies": {
 		"@google/genai": "^1.28.0",
@@ -42,6 +43,8 @@
 		"eslint-plugin-react-hooks": "^5.2.0",
 		"eslint-plugin-react-refresh": "^0.4.22",
 		"globals": "^16.4.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.6",
 		"ts-node": "^10.9.2",
 		"typescript": "~5.9.3",
 		"typescript-eslint": "^8.45.0",
