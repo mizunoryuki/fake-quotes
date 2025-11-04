@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# fake-quotes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+シンプルな「名言 / 出典」ジェネレーター React アプリケーション。
+Vite + React + TypeScript で構成され、生成API（外部 Worker / サーバー）へリクエストして画像を作成・ダウンロードできます。
 
-Currently, two official plugins are available:
+## 概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+このプロジェクトはフロントエンド（Vite）でユーザーが「名言」や「出典」を入力し、外部APIに投げて候補を生成するフローを持ちます。
+生成された候補はカード一覧として表示され、画像化してダウンロードできます。
 
-## React Compiler
+一部サーバー側（生成エンジン）は Cloudflare Worker や独自サーバー経由で提供される想定です。フロントエンドは環境変数 `VITE_API_URL` を参照して API にリクエストします。
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## 必要なもの
+- Node.js（推奨: 18+）
+- pnpm
 
-## Expanding the ESLint configuration
+## セットアップ（ローカル開発）
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. 依存インストール
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. 環境変数（プロジェクトルートに `.env`）
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+フロントエンドから外部APIを直接呼ぶ場合は `VITE_API_URL` を設定してください。
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+指定していない場合は、Nodeサーバーが指定される。
+
+`.env` を変更した場合は Dev サーバーの再起動が必要です。
+
+1. 開発サーバー起動
+
+```bash
+pnpm run dev
 ```
+
+ブラウザで http://localhost:5173 を開いて動作を確認します。
+
+## 主要コマンド
+
+- ビルド(フロントエンドのみ):
+
+```bash
+pnpm run build
+```
+
+- 静的プレビュー (Vite):
+
+```bash
+pnpm run preview
+```
+
+## API エンドポイント
+
+フロントエンドは以下の形で生成APIに POST します。
+
+- path: `/api/generate`（`VITE_API_URL` が設定されていれば `VITE_API_URL + /api/generate` を使います）
+- body: `{ mode: "quote" | "author", inputText: string }`
+
+modeはinputされたテキストの種類を指定しています。
+modeがquoteなら、inputの値として言葉を指定している。この時、APIから返される値は著者や出典。
+modeがsourceなら、inputの値として著者や出典している。この時、APIから返される値は言葉。
