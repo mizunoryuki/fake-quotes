@@ -76,6 +76,7 @@ app.post("/api/generate", async (c) => {
 		});
 
 		if (!resp.ok) {
+			// json化できない
 			const errText = await resp.text();
 			return c.json({ error: errText }, 500);
 		}
