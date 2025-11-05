@@ -35,11 +35,9 @@ jobs:
           ls -R
 
       - name: Install dependencies
-        working-directory: fake-quotes
         run: pnpm install --frozen-lockfile
 
       - name: Deploy to Cloudflare Workers
-        working-directory: fake-quotes
         run: pnpm wrangler deploy src/worker.ts --config wrangler.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
