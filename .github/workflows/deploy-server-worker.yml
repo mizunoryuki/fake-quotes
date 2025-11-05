@@ -7,7 +7,7 @@ on:
     paths:
       - "src/worker.ts"
       - "wrangler.toml"
-
+  workflow_dispatch : {}
 jobs:
   deploy:
     runs-on: ubuntu-latest
