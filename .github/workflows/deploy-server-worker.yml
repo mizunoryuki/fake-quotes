@@ -28,6 +28,12 @@ jobs:
           node-version: 22
           cache: "pnpm"
 
+      - name: Debug working directory
+        run: |
+          echo "Current path: $(pwd)"
+          echo "Files:"
+          ls -R
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
