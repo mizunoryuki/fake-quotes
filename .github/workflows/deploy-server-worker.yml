@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "worker.ts"
+      - "src/worker.ts"
       - "wrangler.toml"
 
 jobs:
